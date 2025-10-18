@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Factor Health Risk Assessment for Newborns and Adoloscents</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fffafc;
+      color: #444;
+      overflow-x: hidden;
+    }
+    
+    header {
+  background: linear-gradient(135deg, #fde2eb, #e9eeff); /* softer pink/pastel gradient */
+  color: #fff;
+  padding: 40px 25px;
+  text-align: center;
+  border-radius: 25px; /* smooth curved edges */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* slightly stronger shadow for depth */
+  max-width: 1000px;
+  margin: 20px auto; /* center the header */
+
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #c45c9e; /* rich pink/purple text for contrast */
+}
+
+header p {
+  margin: 10px 0 0 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555; /* softer text color for tagline */
+}
+
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #fde2eb;
+      padding: 10px 0;
+      border-bottom: 2px solid #f8c8dc;
+    }
+    nav button {
+      padding: 12px 20px;
+      margin: 0 10px;
+      background: #fff;
+      border: 2px solid #f8c8dc;
+      border-radius: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #555;
+    }
+    nav button:hover {
+      background: #f8c8dc;
+      color: #fff;
+    }
+    nav button.active {
+      background: #c7d2f5;
+      color: #000;
+      border-color: #c7d2f5;
+    }
+    section {
+      display: none;
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    section.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      border-left: 6px solid #f8c8dc;
+      padding-left: 10px;
+      color: #c45c9e;
+    }
+    p, li { line-height: 1.7; margin-bottom: 10px; }
+    ul { line-height: 1.7; margin: 10px 0 20px 20px; }
+
+    /* Cards */
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .card.visible { opacity: 1; transform: translateY(0); }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+    .team-member {
+      background: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .team-member:hover {
+  transform: translateY(-15px);
+  background: #e7d3da; /* Light pink background on hover */
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+}
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 3px solid #f8c8dc;
+    }
+    .team-member h3 { margin: 5px 0; color: #c45c9e; }
+    .team-member p { font-size: 14px; color: #555; }
+
+    /* Accordion */
+    .accordion {
+      background-color: #fde2eb;
+      color: #444;
+      cursor: pointer;
+      padding: 15px;
+      width: 100%;
+      border: none;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .accordion.active, .accordion:hover { background-color: #f8c8dc; color: #fff; }
+    .panel {
+      padding: 15px 15px;
+      display: none;
+      background-color: #fff;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      margin-bottom: 10px;
+    }
+
+    .intro-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 15px;
+      justify-content: center;
+    }
+    .intro-images img {
+      width: 45%;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .intro-images img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+    @media (max-width: 768px) { .intro-images img { width: 100%; } }
+
+    /* Counters */
+    #counters {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    .counter {
+      background: #fff;
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 180px;
+      margin: 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+    .counter:hover { transform: scale(1.05); }
+    .counter h3 { font-size: 28px; margin: 0; color: #c45c9e; }
+
+    /* Research Questions Grid */
+    .rq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .rq-card {
+      background: linear-gradient(135deg,#fde2eb,#a2d5f2);
+      padding: 20px;
+      border-radius: 20px;
+      color: #000;
+      font-weight: 600;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .rq-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+
+    canvas { margin: 20px auto; display: block; max-width: 600px; }
+
+    .team-mission {
+  background: #fde2eb;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 30px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.team-mission h3 {
+  color: #c45c9e;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+}
+
+.team-mission p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* --- Added: Data Exploration Styles --- */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.explore-card {
+  background: linear-gradient(135deg, #fde2eb, #d0e8f2);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.explore-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 600px;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.close-btn {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  color: #c45c9e;
+  font-weight: bold;
+}
+/* --- Added: Flowchart Design --- */
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+.flow-step {
+  background: linear-gradient(135deg, #f7e2f4, #d1ecf3);
+  border: 2px solid #c45c9e;
+  border-radius: 15px;
+  padding: 15px 25px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.flow-step:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+}
+.arrow {
+  font-size: 22px;
+  color: #c45c9e;
+  margin: 3px 0;
+}
+
+/* --- Added: Horizontal Flowchart Design --- */
+.flowchart-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+  padding: 10px;
+}
+
+.flow-step {
+  background: linear-gradient(135deg, #f7e2f4, #d1ecf3);
+  border: 2px solid #c45c9e;
+  border-radius: 15px;
+  padding: 15px 20px;
+  min-width: 170px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.flow-step:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.arrow-right {
+  font-size: 24px;
+  color: #c45c9e;
+  font-weight: bold;
+  animation: pulseArrow 1.5s infinite;
+}
+
+@keyframes pulseArrow {
+  0% { transform: translateX(0); opacity: 0.8; }
+  50% { transform: translateX(3px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.8; }
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 900px) {
+  .flowchart-horizontal {
+    flex-direction: column;
+  }
+  .arrow-right {
+    transform: rotate(90deg);
+    animation: none;
+  }
+}
+
+/* --- Added: Horizontal Panel Flow Design --- */
+.horizontal-flow {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 20px 10px;
+}
+
+.flow-box {
+  flex: 0 0 auto;
+  background: linear-gradient(90deg, #fde2eb, #d0e8f2);
+  border: 2px solid #c45c9e;
+  border-radius: 40px;
+  padding: 25px 35px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  position: relative;
+  min-width: 220px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.flow-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+}
+
+.flow-box .arrow {
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #c45c9e;
+  font-weight: bold;
+}
+
+/* last box has no arrow
+.flow-box:last-child .arrow {
+  display: none;
+}
+
+/* Scroll behavior for smaller screens */
+.horizontal-flow::-webkit-scrollbar {
+  height: 6px;
+} */
+.horizontal-flow::-webkit-scrollbar-thumb {
+  background-color: #d09dc2;
+  border-radius: 3px;
+}
+
+@media (max-width: 900px) {
+  .horizontal-flow {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .flow-box {
+    min-width: 280px;
+  }
+  .flow-box .arrow {
+    display: none;
+  }
+} */
+
+/* ---- Larger Modal for Data Cleaning ---- */
+.large-modal {
+  width: 75vw;
+  height: 75vh;
+  max-width: 1200px;
+  max-height: 850px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.2);
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.large-modal h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.modal-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* ---- Horizontal Flow ---- */
+.horizontal-flow {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  padding: 20px 10px;
+  width: 100%;
+}
+
+.flow-box {
+  flex: 0 0 auto;
+  background: linear-gradient(90deg, #fde2eb, #d0e8f2);
+  border: 2px solid #c45c9e;
+  border-radius: 45px;
+  padding: 30px 40px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  position: relative;
+  min-width: 250px;
+  max-width: 280px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.flow-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.flow-box .arrow {
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+  color: #c45c9e;
+  font-weight: bold;
+}
+
+.flow-box:last-child .arrow {
+  display: none;
+}
+
+
+.horizontal-flow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap; /* allows wrapping if too wide */
+  gap: 12px;
+  padding: 10px 5px;
+  width: 100%;
+  overflow-x: auto; /* scrolls horizontally if needed */
+}
+
+
+.flow-box {
+  flex: 1;
+  background: linear-gradient(90deg, #fde2eb, #d0e8f2);
+  border: 2px solid #c45c9e;
+  border-radius: 35px;
+  padding: 18px 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  min-width: 140px;
+  max-width: 180px;
+}
+
+.flow-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.flow-box .arrow {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #c45c9e;
+  font-weight: bold;
+}
+
+.flow-box:last-child .arrow {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  overflow: hidden; /* keeps body fixed */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 3% auto;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 85%;
+  max-width: 900px;
+  max-height: 85vh;             /* 👈 limits panel height */
+  overflow-y: auto;             /* 👈 enables scroll inside */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  scrollbar-width: thin;        /* Firefox scrollbar style */
+  scrollbar-color: #999 #f1f1f1;
+}
+
+/* Optional: custom scrollbar for Chrome, Edge, Safari */
+.modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.close-btn {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #e63946;
+}
+
+.figure-img {
+  display: block;
+  margin: 10px auto 20px auto;
+  width: 100%;
+  max-width: 750px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.dual-figure {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.dual-figure img {
+  width: 100%;
+  max-width: 400px;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+  <h1>Multi-Factor Health Risk Assessment for Newborns and Adoloscents</h1>
+  <p>Data-Driven Insights for Infant Health Using Classification, Regression & Clustering</p>
+</header>
+
+
+  <nav>
+    <button class="active" onclick="showTab(event, 'intro')">Introduction</button>
+    <button onclick="showTab(event, 'team')">Team</button>
+    <button onclick="showTab(event, 'proposal')">Proposal Overview</button>
+    <button onclick="showTab(event, 'exploration')">Data Exploration</button>
+
+  </nav>
+
+  <!-- Introduction Tab -->
+  <section id="intro" class="active">
+    <h2>Introduction</h2>
+
+    <div class="accordion">Research Topic & Significance</div>
+    <div class="panel">
+      <p>Our research focuses on developing a composite health risk index for newborns and infants using population-level health data. The goal is to identify patterns and disparities in infant health outcomes, such as assisted ventilation, birth complications, and mortality, by leveraging different social economic factors. This research is important because infant health is a key indicator of overall population well-being and healthcare system effectiveness. The importance of this work is underscored by national statistics. For example, in 2022, non-Hispanic Black infants experienced an infant mortality rate of 10.9 per 1,000 live births, compared to just 3.5 per 1,000 among non-Hispanic Asian infants (CDC, 2023 - Figure 1). Similarly, geographic disparities persist: states like Mississippi and Arkansas report mortality rates above 8 per 1,000, while western states such as California and Oregon remain closer to 4 per 1,000 (Figure 2). These disparities highlight the urgent need for data-driven tools that not only describe these differences but also predict and classify risk so that interventions can be targeted where they are most needed. By combining clustering, regression, and classification methods, our research seeks to move beyond descriptive statistics into predictive modeling of risk profiles. This approach allows us to uncover hidden risk groups, quantify how different social and demographic factors contribute to poor outcomes, and create actionable categories such as low, medium, and high-risk populations. In doing so, our project addresses a pressing social issue: reducing health inequities and improving survival outcomes for infants across diverse communities in the United States.
+</p>
+<p><i>Visual Source: CDC National Center for Health Statistics – Infant Mortality by Race and State, 2022
+</i></p>
+      <div class="intro-images">
+        <img src="Images\Into_Images\Intro Image 1.jpg" alt="Infant Health Graph 1">
+        <img src="Images\Into_Images\Intro Image 2.jpg" alt="Infant Health Graph 2">
+      </div>
+    </div>
+
+    <div class="accordion">Stakeholders</div>
+    <div class="panel">
+      <p>Infant mortality affects many people and groups, with impacts that go beyond just health numbers. Families and communities experience deep emotional and psychological stress when a baby is born too early or dies. Medical institutions and professionals face more pressure to care for mothers and babies who are at risk. The healthcare system as a whole is affected through higher medical costs and increased demand for special services, like neonatal intensive care units (NICUs). Hospitals also face extra pressure to address health gaps among different populations. Governments and policymakers are impacted as well, because high infant death rates reveal problems in access to healthcare, living conditions, and support programs for mothers. These issues require attention, planning, and allocation of resources to improve outcomes. Employers and the economy feel indirect effects too, since poor maternal and infant health can reduce workforce participation and create financial strain for families. On a larger scale, infant mortality highlights inequalities across different social groups. This shows that infant mortality is not just a medical issue, but also a social and economic problem with effects that reach far across society.
+</p>
+    </div>
+
+    <div class="accordion">Existing Solutions & Gaps</div>
+    <div class="panel">
+    <p>Current solutions in maternal and fetal health increasingly rely on machine learning (ML) methods to predict adverse outcomes. The study by Cho et al. [1] used six ML models on a national cohort of very low birth weight infants to predict risks like extremely preterm birth, extremely low birth weight, and small-for-gestational-age. Among these, the random forest model performed best (accuracy 0.79, AUC 0.72) and identified maternal age, birth month, PM10 air pollution, and pregnancy complications as key predictors. Similarly, Mennickent et al. [2] reviewed a wide body of ML applications in maternal-fetal health, covering gestational diabetes, preeclampsia, perinatal death, and stillbirth prediction. They noted that non-linear ML methods such as random forest, gradient boosting, and deep neural networks are most commonly applied, achieving high predictive performance across conditions. Although machine learning has shown strong promise in predicting adverse maternal and fetal outcomes, most existing studies rely heavily on classification models. These methods primarily assign risk categories (e.g., high vs. low risk, diseased vs. healthy) but do not fully capture the continuous nature of clinical parameters where regression could provide richer insights. Likewise, clustering approaches that might reveal hidden subgroups of mothers or infants with distinct risk profiles are rarely explored. This overdependence on classification creates a gap in understanding nuanced relationships between risk factors, disease progression, and outcome severity. As a result, models may achieve good predictive accuracy but fall short in offering comprehensive guidance for healthcare providers.
+
+    </p>
+    <p><i>[1] H. Cho, E. H. Lee, K.-S. Lee, and J. S. Heo, “Machine learning-based risk factor analysis of adverse birth outcomes in very low birth weight infants,” Scientific Reports, vol. 12, no. 1, p. 12119, Oct. 2022, doi: 10.1038/s41598-022-16234-y.</i></p>
+    <p><i>[2] D. Mennickent, A. Rodríguez, M. C. Opazo, C. A. Riedel, E. Castro, A. Eriz-Salinas, J. Appel-Rubio, C. Aguayo, A. E. Damiano, E. Guzmán-Gutiérrez, and J. Araya, “Machine learning applied in maternal and fetal health: a narrative review focused on pregnancy diseases and complications,” Frontiers in Endocrinology, vol. 14, 2023, Art. no. 1130139, doi: 10.3389/fendo.2023.1130139.</i></p>
+  </div>
+
+    <div class="accordion">Blueprint</div>
+    <div class="panel">
+    <p>
+    The primary goal of this project is to develop a Multifactor Health Risk Index for newborns in San Francisco, integrating demographic, medical, and socioeconomic factors to identify infants at high risk for adverse outcomes. The team will begin by preprocessing and cleaning a rich dataset derived from the San Francisco Maternal, Child, and Adolescent Health Needs Assessment, which includes over 83,000 birth records, hospital admissions, emergency room visits, and newborn screenings. Key features such as age, sex, race/ethnicity, insurance type, zip code, and health outcomes will be leveraged to capture a complete picture of each infant’s risk profile. The first step in analysis will be clustering, which will uncover natural groupings of infants based on multifactorial similarities, revealing hidden patterns in the population. Following this, regression models will quantify the influence of each factor on health outcomes, producing continuous risk scores that reflect the severity or likelihood of complications. These insights will provide both a granular and holistic view of newborn health disparities across different neighborhoods, insurance types, and demographic groups. 
+    </p>
+    <p>
+      Once clusters and regression scores are established, they will be used to define risk categories (low, medium, high) for each newborn, which will serve as class labels for supervised classification models. These models will learn the patterns that determine cluster membership and risk scores, allowing predictions for unseen cases. Our team will explore multiple machine learning approaches including decision trees, random forests, support vector machines, and gradient boosting to optimize predictive performance. To support interpretation and decision-making, the project will include rich visualizations such as heatmaps or cluster diagrams, highlighting disparities and key contributing factors. While the primary dataset is the SF MCAH Needs Assessment, supplemental data may include other health related data. The overarching aim is to create an interpretable machine learning framework that can inform necessary stakeholders in designing targeted interventions for high-risk newborns.
+    </p>
+    </div>
+
+  
+  </section>
+
+  <!-- Team Tab -->
+  <section id="team">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="Images\Profiles\Annessha.png" alt="Annessha Profile">
+        <h3>Sai Annessha Veluri</h3>
+        <p>Graduate Student in Data Science</p>
+        <p>Data Lead: Specialized in data cleaning, preprocessing, and statistical modeling .Passionate about health data and analytics.</p>
+        <p><a href="https://www.linkedin.com/in/sai-annessha-veluri-05515b227" target="_blank">LinkedIn</a> | <a href="https://github.com/Annessha18" target="_blank">GitHub</a></p>
+      </div>
+      <div class="team-member">
+        <img src="Images\Profiles\Aravind.jpeg" alt="Aravind Profile">
+        <h3>Sai Aravind Nelluri</h3>
+        <p>Data Science graduate student</p>
+        <p>Visualization Lead: pecialized in transforming complex data into clear and impactful visualizations,Interested in storytelling with data.</p>
+        <p><a href="https://www.linkedin.com/in/sai-aravind-nelluri" target="_blank">LinkedIn</a> | <a href="https://github.com/arvnd-nelri" target="_blank">GitHub</a></p>
+      </div>
+      <div class="team-member">
+        <img src="Images\Profiles\Vishva.jpeg" alt="Vishva Profile">
+        <h3>Vishvapavani Bhupathi</h3>
+        <p>Masters in Data Science student</p>
+        <p>Modelling Lead: interests lie in applying AI techniques to improve early detection of health risks.Focused on machine learning and predictions.</p>
+        <p><a href="https://www.linkedin.com/in/vishvapavani-bhupathi-bb8a1b227/" target="_blank">LinkedIn</a> | <a href="https://github.com/vishvap-bhupathi" target="_blank">GitHub</a></p>
+      </div>
+
+      
+
+    </div>
+    <div class="team-mission">
+    <h3>Our Mission</h3>
+    <p>Our mission is to safeguard the well-being of mothers and infants by leveraging AI and data insights to identify risks early, guide interventions, and empower families, ensuring every newborn has the healthiest possible start in life.</p>
+  </div>
+  </section>
+
+  <!-- Proposal Overview Tab -->
+  <section id="proposal">
+    <h2>Proposal Overview</h2>
+    <div class="card">
+      <p>The health and well-being of newborns and infants are critical indicators of a community’s overall public health, yet in many urban areas, including San Francisco, disparities in infant health outcomes persist due to differences in socioeconomic status, access to healthcare, and demographic factors. Some newborns face a higher risk of adverse outcomes such as preterm birth, the need for assisted ventilation, and hospitalization shortly after birth, making it essential to address these disparities to ensure equitable healthcare and reduce preventable complications. Early-life health outcomes not only affect the immediate survival and quality of life of infants but also influence long-term physical and cognitive development. Communities with higher rates of adverse newborn outcomes often experience compounded social and economic challenges, with families facing higher medical costs, stress, and long-term health consequences. By identifying high-risk groups and understanding the factors contributing to poor outcomes, public health interventions can be better targeted to reduce these disparities and save lives. This effort aligns with the United Nations Sustainable Development Goal 3: Good Health and Well-Being, which emphasizes ensuring healthy lives and promoting well-being for all at all ages.
+</p>
+    </div>
+    <div class="card">
+      <p>Our proposed solution is to develop a comprehensive health risk assessment framework for newborns using data-driven approaches. By leveraging different social features from city-level public health data, we aim to classify infants into low, medium, and high-risk categories. This will involve clustering to identify natural groupings of newborn health profiles, regression to quantify the influence of different risk factors, and classification to predict risk categories for individual infants. To ensure transparency and interpretability, we will use explainable AI techniques such as SHAP and LIME, along with visualizations that communicate risk patterns clearly to public health stakeholders.</p>
+    </div>
+    <div class="card">
+      <p>The scope of this project extends beyond mere prediction. It aims to provide actionable insights for healthcare providers, policymakers, and community organizations to identify vulnerable populations, allocate resources effectively, and implement targeted interventions. The framework will also highlight patterns and disparities that may not be immediately visible, helping guide long-term strategies to improve infant health outcomes. Ultimately, this project seeks to combine robust data analysis with clear, interpretable insights that can drive meaningful improvements in public health across the city.</p>
+    </div>
+
+    <h3 style="margin-top:30px; color:#c45c9e;">Research Questions Dashboard</h3>
+    <div class="rq-grid">
+      <div class="rq-card">Which demographic factors are most associated with high-risk outcomes?</div>
+      <div class="rq-card">How does combining clustering and regression improve classification accuracy?</div>
+      <div class="rq-card">Can ensemble models outperform standalone classifiers?</div>
+      <div class="rq-card">How does geographic distribution relate to high/low-risk clusters?</div>
+      <div class="rq-card">Are infants with public insurance more likely to be high-risk?</div>
+      <div class="rq-card">Which features consistently emerge as strongest predictors?</div>
+      <div class="rq-card">Which race/ethnicity groups experience higher adverse outcomes?</div>
+      <div class="rq-card">Which health conditions are most sensitive to demographic predictors?</div>
+      <div class="rq-card">How do cluster visualizations correlate with classification risk?</div>
+      <div class="rq-card">Which features identified by SHAP drive high-risk classifications?</div>
+    </div>
+  </section>
+
+<section id="exploration">
+  <h2>Data Exploration</h2>
+  <p>Our data exploration process involves acquiring, cleaning, preprocessing, and visualizing data to prepare it for modeling and analysis. Please click on each button to explore further.</p>
+  <div class="explore-grid">
+    <div class="explore-card" onclick="openModal('acquisitionModal')">Data Acquisition</div>
+    <div class="explore-card" onclick="openModal('cleaningModal')">Data Cleaning & Preprocessing</div>
+    <div class="explore-card" onclick="openModal('visualizationModal')">Data Visualization</div>
+  </div>
+</section>
+
+<!-- MODALS -->
+<div id="acquisitionModal" class="modal">
+  <div class="modal-content large-modal">
+    <span class="close-btn" onclick="closeModal('acquisitionModal')">&times;</span>
+
+  <h2>Data Acquisition</h2>
+  <p>
+    The dataset used in this study is titled 
+    <strong>Maternal, Child, and Adolescent Health Needs Assessment (2023–2024)</strong>,
+    available on the <a href="https://catalog.data.gov/dataset/maternal-child-and-adolescent-health-needs-assessment-2023-2024" 
+    target="_blank">Data.gov open data portal</a> under the topic <em>Health</em>.
+  </p>
+
+  <p>
+    Published by the <strong>San Francisco Department of Public Health (SFDPH)</strong>, this dataset contains aggregated
+    health indicators of maternal, infant, and adolescent populations in San Francisco. It directly supports our project goal of
+    creating a data-driven health risk assessment framework covering newborns and adolescents in San Francisco by providing
+    essential demographic, social, and clinical data. The dataset helps reveal discrepancies in early-life health outcomes,
+    enabling identification of high-risk groups and targeted public health interventions.
+  </p>
+
+  <h3>Dataset Overview</h3>
+  <ul>
+    <li><strong>Total Records:</strong> 62,714</li>
+    <li><strong>Total Features:</strong> 28</li>
+    <li><strong>Data Type:</strong> Aggregated health indicators (demographic, clinical, and socio-economic)</li>
+    <li><strong>Geographic Focus:</strong> San Francisco, USA</li>
+    <li><strong>Source:</strong> Various public health data systems</li>
+  </ul>
+
+  
+
+</div>
+
+</div>
+
+
+
+<div id="cleaningModal" class="modal">
+  <div class="modal-content large-modal">
+    <span class="close-btn" onclick="closeModal('cleaningModal')">&times;</span>
+    <h2>Data Cleaning & Preprocessing</h2>
+    <p class="modal-subtitle">
+      The flow below outlines each major step performed during the data preparation stage.
+    </p>
+
+    <div class="horizontal-flow">
+      <div class="flow-box">
+        <p>1️⃣ Removal of Missing Values</p>
+        <span class="arrow">→</span>
+        
+      </div>
+
+      <div class="flow-box" onclick="openStep('separation')">
+        <p>2️⃣ Separation of Categorical & Numerical Features</p>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="flow-box" onclick="openStep('outlier')">
+        <p>3️⃣ Outlier Analysis</p>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="flow-box" onclick="openStep('encoding')">
+        <p>4️⃣ Label Encoding for Categorical Features</p>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="flow-box" onclick="openStep('scaling')">
+        <p>5️⃣ Standard Scaling for Numerical Features</p>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="flow-box" onclick="openStep('summary')">
+        <p>6️⃣ Summary Statistics for Numerical Features</p>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="flow-box" onclick="openStep('assessment')">
+        <p>7️⃣ Data Assessment & Validation</p>
+      </div>
+    </div>
+
+<!-- Before & After Images -->
+    <div style="margin-top:30px;">
+      <h3>Data Before Cleaning</h3>
+      <img src="Images/Data_Cleaning_and_Preprocessing/Before.jpg" alt="Before Cleaning" style="max-width:100%; margin-bottom:20px; border-radius:8px;">
+
+      <h3>Data After Cleaning</h3>
+      <img src="Images/Data_Cleaning_and_Preprocessing/after.jpg" alt="After Cleaning" style="max-width:100%; border-radius:8px;">
+    </div>
+  </div>
+  </div>
+</div>
+
+<div id="visualizationModal" class="modal">
+
+  <div class="modal-content">
+  <span class="close-btn" onclick="closeModal('visualizationModal')">&times;</span>
+  <h2>Data Visualization Overview</h2>
+  <p>
+    The following visualizations explore relationships among various factors that influence newborn health outcomes.
+  </p>
+
+  <hr>
+
+  <!-- Figure 1 -->
+  <h3>Figure 1. Correlation heatmap of numerical variables</h3>
+  <img src="Images/Data_Visualization_Overview_Images/Figure_1_Correlation_HeatMap.png" alt="Correlation heatmap" class="figure-img">
+  <p>
+    The correlation heatmap in Figure 1 shows the relationships among numerical variables that affect newborn health outcomes.
+    A strong positive correlation exists between <b>Rate_SF_pop</b>, <b>CI_low</b>, and <b>CI_high</b>. This suggests that changes
+    in newborn health rates are consistently reflected in their confidence intervals, ensuring data reliability. Moderate correlations
+    between <b>Number_with_outcome</b> and <b>Sort_1000_or_more</b> indicate that larger population groups are linked to higher recorded outcomes.
+    Conversely, the negative correlation between <b>Denominator</b> and rate-related variables means that larger population bases relate
+    to lower standardized rates. This helps identify redundant features and guide the choice of influential factors in assessing
+    multi-factor health risks among newborns.
+  </p>
+
+  <hr>
+
+  <!-- Figure 2 and 3 -->
+  <div class="dual-figure">
+    <div>
+      <h3>Figure 2. Explained variance of principal components</h3>
+      <img src="Images/Data_Visualization_Overview_Images/Figure_2_PCA_Explained_Variance.png" alt="PCA explained variance" class="figure-img">
+    </div>
+    <div>
+      <h3>Figure 3. 2D PCA projection of dataset</h3>
+      <img src="Images/Data_Visualization_Overview_Images/Figure_3_2D_PCA_Projection.png" alt="2D PCA projection" class="figure-img">
+    </div>
+  </div>
+  <p>
+    The PCA visualizations (Figures 2 and 3) illustrate how dataset variation is captured by two principal components.
+    The explained variance curve (Fig. 2) shows that the first two components account for nearly 100% of the variance,
+    indicating minimal information loss during dimensionality reduction. Figure 3’s 2D projection demonstrates that
+    data structure can be effectively represented in two dimensions. Although reduced features were not used directly,
+    <b>PC1</b> and <b>PC2</b> were concatenated to the dataset to enhance model learning and capture underlying variability.
+  </p>
+
+  <hr>
+
+  <!-- Figure 4 -->
+  <h3>Figure 4. Trend of average newborn risk rate over the years</h3>
+  <img src="Images/Data_Visualization_Overview_Images/Figure_4_Trend_Of_Rate_SF_Pop.png" alt="Trend of Rate_SF_pop" class="figure-img">
+  <p>
+    The line graph in Figure 4 shows the trend of average <b>Rate_SF_pop</b> from 1997 to 2025. The trend is stable until around 2020,
+    after which a sharp increase occurs, peaking by 2024–2025. This rise may stem from socio-economic factors, healthcare gaps,
+    or pandemic effects that impacted maternal and newborn care. The visualization highlights a critical change warranting
+    further investigation and targeted interventions.
+  </p>
+
+  <hr>
+
+  <!-- Figure 5 -->
+  <h3>Figure 5. QQ Plot for Rate_SF_pop</h3>
+  <img src="Images/Data_Visualization_Overview_Images/Figure_5_QQ_Plot_Of_Rate_SF_Plot.png" alt="QQ plot Rate_SF_pop" class="figure-img">
+  <p>
+    The QQ plot reveals a strong right-skewness in <b>Rate_SF_pop</b>, indicating that most values cluster at lower levels while
+    a few groups show exceptionally high rates. This suggests disparities in newborn health outcomes among populations or regions.
+  </p>
+
+  <hr>
+
+  <!-- Figure 6 -->
+  <h3>Figure 6. Distribution of Rate_SF_pop across age groups</h3>
+  <img src="Images/Data_Visualization_Overview_Images/Figure_6_Box_Plot_By_Age_Group.png" alt="Box plot by age group" class="figure-img">
+  <p>
+    The box plot shows substantial variation in <b>Rate_SF_pop</b> across age groups. Newborns (0–12 months) and pregnant individuals
+    exhibit higher median rates and wider ranges, implying greater vulnerability. Adolescent and adult groups show more stability,
+    and the presence of many outliers emphasizes population heterogeneity.
+  </p>
+
+  <hr>
+
+  <!-- Figure 7 -->
+  <h3>Figure 7. Distribution of Rate_SF_pop across racial and ethnic groups</h3>
+  <img src="Images/Data_Visualization_Overview_Images/Figure_7_Violen_Plot_By_Ethinicity.png" alt="Violin plot by ethnicity" class="figure-img">
+  <p>
+    The violin plot highlights variability across racial and ethnic groups. <b>Pacific Islander</b> and <b>Unknown</b> categories
+    have higher medians and broader spreads, suggesting disparities. In contrast, <b>Asian</b>, <b>White</b>, and <b>Hispanic/Latino</b>
+    groups show lower, more consistent rates, reflecting relatively stable health outcomes.
+  </p>
+
+  <hr>
+
+  <!-- Figure 8 -->
+  <h3>Figure 8. Yearly trend of Rate_SF_pop across sex categories</h3>
+  <img src="Images/Data_Visualization_Overview_Images/Figure_8_Line_Graph_By_Sex.png" alt="Line graph by sex" class="figure-img">
+  <p>
+    The line graph shows yearly trends of <b>Rate_SF_pop</b> for <b>Male</b>, <b>Female</b>, and <b>All</b> categories.
+    Moderate fluctuations are visible, with all groups following a similar trajectory. After 2015, the rates begin to rise,
+    peaking recently—particularly for the “All” group—suggesting consistent but increasing risks across sexes.
+  </p>
+
+  <hr>
+
+<!-- Figure 9 -->
+<h3>Figure 9. Comparative bubble plot of Denominator, Number with Outcome, and Rate_SF_pop</h3>
+<img src="Images/Data_Visualization_Overview_Images/Figure_9_Bubble_Plot.png" alt="Comparative bubble plot" class="figure-img">
+<p>
+  This visualization presents a comparative bubble plot showing the distribution of <b>Denominator</b>, 
+  <b>Number with Outcome</b>, and <b>Rate_SF_pop</b> across various categories. Each circle represents grouped data, 
+  with the bubble size reflecting the magnitude of values within each metric. The plot indicates significant variation, 
+  with <b>Denominator</b> showing the largest scale differences, likely representing population size or sample base. 
+  The <b>Number with Outcome</b> values remain moderate, while <b>Rate_SF_pop</b> displays lower relative values 
+  but consistent clustering patterns. This highlights proportional relationships among population size, recorded outcomes, 
+  and associated rates, providing a clear overview of data magnitude and balance across metrics.
+</p>
+
+<hr>
+
+<!-- Figure 10 -->
+<h3>Figure 10. Average Rate_SF_pop by insurance type</h3>
+<img src="Images/Data_Visualization_Overview_Images/Figure_10_Bar_Chart_Insurance.png" alt="Bar chart by insurance type" class="figure-img">
+<p>
+  This bar chart illustrates the average <b>Rate_SF_pop</b> across different insurance types. Individuals covered under 
+  <b>SFHP Head Start</b> or <b>Early Head Start</b> programs have the highest average risk rates, followed by <b>ALL</b> 
+  and <b>Public</b> insurance categories. In contrast, <b>Private</b> and <b>Not Public</b> insurance types exhibit 
+  significantly lower rates. This suggests that newborns associated with public or community-based insurance programs 
+  may experience higher health-related risks compared to those under private coverage.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+
+    // Tab switching
+    function showTab(event, tabId) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      event.target.classList.add("active");
+    }
+
+    // Scroll reveal
+    function revealCards() {
+      document.querySelectorAll('.card, .rq-card').forEach(card => {
+        const top = card.getBoundingClientRect().top;
+        if(top < window.innerHeight - 50) card.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealCards);
+    window.addEventListener('load', revealCards);
+
+    // Accordion functionality
+    document.addEventListener("DOMContentLoaded", function() {
+      const accordions = document.querySelectorAll('.accordion');
+      accordions.forEach(acc => {
+        acc.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const panel = this.nextElementSibling;
+          if(panel.style.display === "block"){
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      });
+    });
+
+    // Chart.js
+    const ctx = document.getElementById('riskChart').getContext('2d');
+    const riskChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Insurance', 'Race', 'Zip Code', 'Year'],
+        datasets: [{
+          label: 'Relative Contribution to Risk',
+          data: [30, 25, 20, 25],
+          backgroundColor: ['#f8c8dc', '#a2d5f2', '#fddde6', '#b8e0d2']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }, title: { display: true, text: 'Sample Factor Contributions' } }
+      }
+    });
+
+    // Animated Counters
+    function animateCounter(id, target) {
+      let count = 0;
+      const interval = setInterval(() => {
+        if(count >= target) { document.getElementById(id).innerText = target.toLocaleString(); clearInterval(interval); }
+        else {
+          count += Math.ceil(target/100);
+          document.getElementById(id).innerText = count.toLocaleString();
+        }
+      }, 20);
+    }
+    animateCounter('counter1', 83000);
+    animateCounter('counter2', 15000);
+    animateCounter('counter3', 7000);
+
+    // --- Added: Modal functionality ---
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+
+const modal = document.getElementById("popup-modal");
+  const closeBtn = document.querySelector(".close-btn");
+
+  // Close modal when user clicks ×
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // Optional: close modal when clicking outside the modal content
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+document.querySelectorAll(".close-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.closest(".modal").style.display = "none";
+  });
+});
+
+
+
+
+  </script>
+
+</body>
+</html>
